@@ -1,0 +1,8 @@
+{
+  "name": "pontoview-news-page",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:news": "node ./scripts/build_news.mjs ./docs/data/news_sources_web.json ./docs/data/news.json"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "limit": 80,
+  "sources": [
+    {
+      "name": "Governo do ES",
+      "type": "google_news",
+      "query": "site:es.gov.br notícia OR governo",
+      "scope": "state",
+      "city": "Espírito Santo",
+      "enrich": true,
+      "logo": ""
+    },
+    {
+      "name": "Agência ES",
+      "type": "google_news",
+      "query": "\"Agência de Notícias\" site:es.gov.br",
+      "scope": "state",
+      "city": "Espírito Santo",
+      "enrich": true,
+      "logo": ""
+    },
+    {
+      "name": "Prefeitura de Vitória",
+      "type": "google_news",
+      "query": "site:vitoria.es.gov.br notícia",
+      "scope": "local",
+      "city": "Vitória",
+      "enrich": true,
+      "logo": ""
+    },
+    {
+      "name": "Prefeitura de Vila Velha",
+      "type": "google_news",
+      "query": "site:vilavelha.es.gov.br notícia",
+      "scope": "local",
+      "city": "Vila Velha",
+      "enrich": true,
+      "logo": ""
+    },
+    {
+      "name": "Prefeitura da Serra",
+      "type": "google_news",
+      "query": "site:serra.es.gov.br notícia",
+      "scope": "local",
+      "city": "Serra",
+      "enrich": true,
+      "logo": ""
+    },
+    {
+      "name": "Prefeitura de Cariacica",
+      "type": "google_news",
+      "query": "site:cariacica.es.gov.br notícia",
+      "scope": "local",
+      "city": "Cariacica",
+      "enrich": true,
+      "logo": ""
+    },
+    {
+      "name": "Saúde ES",
+      "type": "google_news",
+      "query": "saúde pública site:es.gov.br OR site:saude.es.gov.br",
+      "scope": "health",
+      "city": "Espírito Santo",
+      "enrich": true,
+      "logo": ""
+    },
+    {
+      "name": "Ministério da Saúde",
+      "type": "google_news",
+      "query": "site:gov.br ministério da saúde campanha",
+      "scope": "health",
+      "city": "Brasil",
+      "enrich": true,
+      "logo": ""
+    },
+    {
+      "name": "Fiocruz",
+      "type": "google_news",
+      "query": "site:fiocruz.br notícia saúde",
+      "scope": "health",
+      "city": "Brasil",
+      "enrich": true,
+      "logo": ""
+    }
+  ]
+}
