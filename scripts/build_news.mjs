@@ -19,7 +19,8 @@ const __dirname = path.dirname(__filename);
 // Repo root = parent of /scripts
 const ROOT = path.resolve(__dirname, "..");
 const DEFAULT_SOURCES = path.join(ROOT, "data", "news_sources_web.json");
-const OUT_PATH = path.join(ROOT, "data", "news.json");
+const OUT_PATH = path.join(ROOT, "docs", "data", "news.json");
+const OUT_PATH_ROOT = path.join(ROOT, "data", "news.json");
 
 const UA =
   "PontoViewBot/1.0 (+https://pontoview.com.br) NodeFetch (GitHub Actions)";
