@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Notícias • Vyre</title>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800;900&display=swap" rel="stylesheet"/>
+
+<style>
+/* ===== VARIÁVEIS (IGUAIS ÔNIBUS) ===== */
+:root{
+  --header: linear-gradient(180deg,#2f6f9d 0%,#184c75 55%,#0f3b5e 100%);
+  --bg: radial-gradient(1200px 900px at 25% 10%, rgba(87,184,231,.22), rgba(10,46,62,0) 60%),
+        radial-gradient(900px 700px at 75% 80%, rgba(52,198,208,.14), rgba(6,18,24,0) 65%),
+        radial-gradient(1400px 1100px at 50% 55%, #0a2232 0%, #081423 62%, #040a0f 100%);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui;
+  background:var(--bg);
+  display:grid;
+  place-items:center;
+  padding:20px;
+}
+
+/* ===== PANEL ===== */
+.panel{
+  width:min(1500px,96vw);
+  height:calc(100vh - 40px);
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 18px 60px rgba(2,10,23,.18);
+  display:flex;
+  flex-direction:column;
+  animation:fade .7s ease forwards;
+}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ===== HEADER (COPIADO DO ÔNIBUS) ===== */
+.header{
+  padding:14px 22px;
+  background:var(--header);
+  color:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.h-left{display:flex;gap:14px;align-items:center}
+.busIcon{
+  width:44px;height:44px;border-radius:14px;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.1);
+}
+.title{font-size:28px;font-weight:900;letter-spacing:.06em}
+.sub{font-size:12px;font-weight:800;letter-spacing:.14em;opacity:.9}
+
+.h-right{text-align:right}
+.clock{font-size:52px;font-weight:900}
+.status{
+  margin-top:6px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.14);
+  font-size:12px;
+  font-weight:900;
+}
+.dot{
+  width:10px;height:10px;border-radius:50%;
+  background:#22c55e;
+  animation:pulse 1.5s infinite;
+}
+.off{background:#ef4444}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(34,197,94,.6)}
+  70%{box-shadow:0 0 0 10px rgba(34,197,94,0)}
+}
+
+/* ===== SUBSTRIP ===== */
+.substrip{
+  background:#f3f7ff;
+  padding:10px 22px;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.14em;
+  display:flex;
+  justify-content:space-between;
+}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;
+  flex:1;
+  overflow:hidden;
+}
+.hero img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.85));
+}
+.content{
+  position:absolute;
+  bottom:20px;
+  left:22px;
+  right:22px;
+  color:#fff;
+}
+.headline{
+  font-size:52px;
+  font-weight:900;
+  line-height:1.08;
+}
+.meta{
+  margin-top:14px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.chip{
+  background:rgba(255,255,255,.88);
+  color:#0f172a;
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.chip img{
+  width:18px;height:18px;object-fit:contain;
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  padding:10px 22px;
+  display:flex;
+  justify-content:flex-end;
+}
+.footer img{height:22px;opacity:.75}
+</style>
+</head>
+
+<body>
+<section class="panel">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="h-left">
+      <div class="busIcon"><span class="material-icons-outlined">newspaper</span></div>
+      <div>
+        <div class="title">NOTÍCIAS</div>
+        <div class="sub">ESPÍRITO SANTO</div>
+      </div>
+    </div>
+    <div class="h-right">
+      <div class="clock" id="clock">--:--</div>
+      <div class="status">
+        <span class="dot" id="dot"></span>
+        <span id="statusText">Online</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="substrip">
+    <span>MANCHETE ATUAL</span>
+    <span><span id="scopeLabel">LOCAL • ES • BR</span>
+  </div>
+
+  <div class="hero">
+    <img id="image"/>
+    <div class="overlay"></div>
+    <div class="content">
+      <div class="headline" id="title">Carregando…</div>
+      <div class="meta">
+        <div class="chip">
+          <img id="logo"/>
+          <span id="source">Fonte</span>
+        </div>
+        <div class="chip" id="date"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <img src="./assets/logo-pontoview.png"/>
+  </div>
+
+</section>
+
+<script>
+/* ===== Notícias: Loader + Rotação (definitivo) =====
+   - Lê ./data/news.json gerado por GitHub Actions
+   - Faz retry automático
+   - Suporta item.image (local), item.imageUrl (remoto), e fallback
+*/
+(function(){
+  const NEWS_URL = "./data/news.json";
+  const ROTATE_MS = 12000;      // tempo por notícia
+  const REFRESH_MS = 5 * 60e3;  // recarrega feed a cada 5 min
+  const MAX_RETRY = 6;
+
+  // Elementos (mantém seu layout)
+  const elImg   = document.querySelector("#heroImage");
+  const elTitle = document.querySelector("#heroTitle");
+  const elSrcPill  = document.querySelector("#pillSource");
+  const elDatePill = document.querySelector("#pillDate");
+  const elScope = document.querySelector("#scopeLabel");
+  const elStatusDot = document.querySelector("#statusDot");
+  const elStatusTxt = document.querySelector("#statusText");
+
+  const state = {
+    items: [],
+    idx: 0,
+    scope: "LOCAL",
+    city: "Vitória",
+    uf: "ES",
+  };
+
+  function qs(name){
+    return new URLSearchParams(location.search).get(name);
+  }
+
+  function setOnline(ok){
+    if(!elStatusDot || !elStatusTxt) return;
+    elStatusDot.classList.toggle("offline", !ok);
+    elStatusTxt.textContent = ok ? "Online" : "Offline";
+  }
+
+  function decodeHtml(s){
+    if(!s) return "";
+    const t = document.createElement("textarea");
+    t.innerHTML = s;
+    return t.value;
+  }
+
+  function cleanText(s){
+    return decodeHtml(String(s||""))
+      .replace(/\s+/g," ")
+      .trim();
+  }
+
+  function fmtDate(iso){
+    if(!iso) return "";
+    try{
+      const d = new Date(iso);
+      if(String(d) === "Invalid Date") return "";
+      const dd = String(d.getDate()).padStart(2,"0");
+      const mm = String(d.getMonth()+1).padStart(2,"0");
+      const yy = d.getFullYear();
+      const hh = String(d.getHours()).padStart(2,"0");
+      const mi = String(d.getMinutes()).padStart(2,"0");
+      return `${dd}/${mm}/${yy} • ${hh}:${mi}`;
+    }catch(e){ return ""; }
+  }
+
+  function pickImage(it){
+    return it.image || it.imageLocal || it.imageUrl || it.imageURL || "";
+  }
+
+  function render(it){
+    if(!it) return;
+
+    // Título
+    if(elTitle) elTitle.textContent = cleanText(it.title || "Notícia");
+
+    // Fonte -> pill (NÃO na manchete)
+    if(elSrcPill) elSrcPill.textContent = cleanText(it.source || "Fonte");
+
+    // Data -> pill
+    const d = fmtDate(it.publishedAt || it.date || it.pubDate);
+    if(elDatePill) elDatePill.textContent = d || "";
+
+    // Escopo/Local (não muda layout)
+    state.scope = (qs("scope") || it.scope || state.scope || "LOCAL").toUpperCase();
+    state.city  = (qs("city") || state.city || "Vitória");
+    state.uf    = (qs("uf") || state.uf || "ES");
+
+    if(elScope){
+      const right = state.scope === "LOCAL"
+        ? `${state.scope} • ${state.city}`
+        : `${state.scope} • ${state.uf} • BR`;
+      elScope.textContent = right;
+    }
+
+    // Imagem
+    const img = pickImage(it);
+    if(elImg){
+      if(!img){
+        elImg.removeAttribute("src");
+        elImg.style.opacity = "0";
+      }else{
+        // cache-bust leve
+        const bust = `v=${encodeURIComponent((it.id || it.url || it.title || Date.now()).toString().slice(0,48))}`;
+        elImg.style.opacity = "0";
+        elImg.onload = () => { elImg.style.opacity = "1"; };
+        elImg.onerror = () => {
+          // some com ícone quebrado
+          elImg.removeAttribute("src");
+          elImg.style.opacity = "0";
+        };
+        elImg.src = img.includes("?") ? (img + "&" + bust) : (img + "?" + bust);
+      }
+    }
+  }
+
+  async function loadNews(retry=0){
+    try{
+      const res = await fetch(`${NEWS_URL}?t=${Date.now()}`, { cache: "no-store" });
+      if(!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const items = Array.isArray(data.items) ? data.items : [];
+      if(!items.length) throw new Error("feed vazio");
+      state.items = items;
+      state.idx = 0;
+      setOnline(true);
+      render(state.items[state.idx]);
+    }catch(err){
+      setOnline(false);
+      if(retry < MAX_RETRY){
+        const wait = Math.min(30000, 1000 * Math.pow(2, retry));
+        setTimeout(() => loadNews(retry+1), wait);
+      }else{
+        // mantém "Carregando..." no título se existir
+        if(elTitle) elTitle.textContent = "Carregando...";
+      }
+    }
+  }
+
+  function rotate(){
+    if(!state.items.length) return;
+    state.idx = (state.idx + 1) % state.items.length;
+    render(state.items[state.idx]);
+  }
+
+  // Boot
+  // Escopo default via query
+  state.scope = (qs("scope") || state.scope).toUpperCase();
+  state.city = qs("city") || state.city;
+  state.uf = qs("uf") || state.uf;
+
+  loadNews(0);
+  setInterval(rotate, ROTATE_MS);
+  setInterval(() => loadNews(0), REFRESH_MS);
+})();
+</script>
+</body>
+</html>
