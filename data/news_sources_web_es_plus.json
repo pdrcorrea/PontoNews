@@ -1,0 +1,89 @@
+{
+  "limit": 80,
+  "sources": [
+    {
+      "name": "G1 ES (Google News)",
+      "type": "google_news",
+      "query": "site:g1.globo.com espirito santo",
+      "enrich": true
+    },
+    {
+      "name": "A Gazeta",
+      "type": "google_news",
+      "query": "site:agazeta.com.br \"Espírito Santo\" OR ES",
+      "enrich": true
+    },
+    {
+      "name": "Folha Vitória",
+      "type": "google_news",
+      "query": "site:folhavitoria.com.br (\"Espírito Santo\" OR ES)",
+      "enrich": true
+    },
+    {
+      "name": "Sim Notícias",
+      "type": "google_news",
+      "query": "site:simnoticias.com.br (\"Espírito Santo\" OR ES)",
+      "enrich": true
+    },
+    {
+      "name": "Governo do ES",
+      "type": "google_news",
+      "query": "site:es.gov.br (notícia OR noticias OR \"Governo do Estado\")",
+      "enrich": true
+    },
+    {
+      "name": "Saúde ES (SESA)",
+      "type": "google_news",
+      "query": "site:saude.es.gov.br (notícia OR noticias OR boletim OR campanha)",
+      "enrich": true
+    },
+    {
+      "name": "Prefeitura da Serra",
+      "type": "google_news",
+      "query": "site:serra.es.gov.br (notícia OR noticias OR comunicado OR campanha)",
+      "enrich": true
+    },
+    {
+      "name": "Prefeitura de Cachoeiro",
+      "type": "google_news",
+      "query": "site:cachoeiro.es.gov.br (notícia OR noticias OR comunicado OR campanha)",
+      "enrich": true
+    },
+    {
+      "name": "Prefeitura de Colatina",
+      "type": "google_news",
+      "query": "site:colatina.es.gov.br (notícia OR noticias OR comunicado OR campanha)",
+      "enrich": true
+    },
+    {
+      "name": "Prefeitura de Linhares",
+      "type": "google_news",
+      "query": "site:linhares.es.gov.br (notícia OR noticias OR comunicado OR campanha)",
+      "enrich": true
+    },
+    {
+      "name": "Prefeitura de São Mateus",
+      "type": "google_news",
+      "query": "site:saomateus.es.gov.br (notícia OR noticias OR comunicado OR campanha)",
+      "enrich": true
+    },
+    {
+      "name": "Ministério da Saúde (GovBR)",
+      "type": "google_news",
+      "query": "site:gov.br/saude (notícia OR noticias OR campanha OR \"Saúde\")",
+      "enrich": true
+    },
+    {
+      "name": "Agência Gov (Governo Federal)",
+      "type": "google_news",
+      "query": "site:agenciagov.ebc.com.br (saúde OR campanha OR programa OR \"Espírito Santo\")",
+      "enrich": true
+    },
+    {
+      "name": "EBC/Agência Brasil (saúde)",
+      "type": "google_news",
+      "query": "site:agenciabrasil.ebc.com.br saúde (campanha OR vacinação OR SUS)",
+      "enrich": true
+    }
+  ]
+}

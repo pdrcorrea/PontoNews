@@ -1,0 +1,11 @@
+{
+  "name": "pontoview-news",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:news": "node ./scripts/build_news.mjs"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^4.5.0"
+  }
+}
