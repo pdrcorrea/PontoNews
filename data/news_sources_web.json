@@ -1,0 +1,49 @@
+{
+  "sources": [
+    {
+      "name": "Prefeitura da Serra",
+      "type": "google_news",
+      "query": "site:serra.es.gov.br"
+    },
+    {
+      "name": "Prefeitura de Cachoeiro de Itapemirim",
+      "type": "google_news",
+      "query": "site:cachoeiro.es.gov.br"
+    },
+    {
+      "name": "Prefeitura de Colatina",
+      "type": "google_news",
+      "query": "site:colatina.es.gov.br"
+    },
+    {
+      "name": "Prefeitura de Linhares",
+      "type": "google_news",
+      "query": "site:linhares.es.gov.br"
+    },
+    {
+      "name": "Prefeitura de São Mateus",
+      "type": "google_news",
+      "query": "site:saomateus.es.gov.br"
+    },
+    {
+      "name": "A Gazeta",
+      "type": "google_news",
+      "query": "site:agazeta.com.br"
+    },
+    {
+      "name": "Folha Vitória",
+      "type": "google_news",
+      "query": "site:folhavitoria.com.br"
+    },
+    {
+      "name": "Sim Notícias",
+      "type": "google_news",
+      "query": "site:simnoticias.com.br"
+    },
+    {
+      "name": "Governo Federal",
+      "type": "google_news",
+      "query": "site:gov.br"
+    }
+  ]
+}
