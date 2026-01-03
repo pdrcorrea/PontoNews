@@ -1,16 +1,45 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta http-equiv="refresh" content="0; url=./news.html" />
-  <title>PontoView • Notícias</title>
-  <style>html,body{height:100%;margin:0;font-family:system-ui;display:grid;place-items:center;background:#0a2232;color:#fff}</style>
-</head>
-<body>
-  <div>
-    <h1 style="margin:0 0 8px">PontoView • Notícias</h1>
-    <p style="margin:0;opacity:.85">Abrindo painel… Se não abrir, <a href="./news.html" style="color:#9ae6ff">clique aqui</a>.</p>
-  </div>
-</body>
-</html>
+const WORKER_URL = "https://pontoview-news.SEUNOME.workers.dev";
+
+const FEEDS = [
+  { name: "Agência Brasil", url: "https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml" },
+  { name: "Brasil de Fato", url: "https://www.brasildefato.com.br/feed/" }
+];
+
+// Atualização do painel (o Worker já tem cache interno por horas)
+const UI_REFRESH_HOURS = 6; // <-- ajuste aqui (3, 6, 12...)
+const WORKER_TTL_HOURS = 6; // <-- deve bater com o de cima
+
+async function loadCombined() {
+  let all = [];
+
+  for (const f of FEEDS) {
+    const api = `${WORKER_URL}?feed=${encodeURIComponent(f.url)}&ttlHours=${WORKER_TTL_HOURS}&safe=1&limit=18`;
+    const data = await fetch(api, { cache: "no-store" }).then(r => r.json());
+    const items = (data.items || []).map(it => ({
+      ...it,
+      source: { ...(it.source || {}), name: f.name }
+    }));
+    all = all.concat(items);
+  }
+
+  // ordena por data
+  all.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+
+  // remove duplicados por link
+  const seen = new Set();
+  all = all.filter(x => {
+    const k = x.link || x.title;
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+
+  // render (pegue imagem em item.image)
+  render(all.slice(0, 12));
+}
+
+// primeira carga
+loadCombined();
+
+// recarrega “de horas em horas”
+setInterval(loadCombined, UI_REFRESH_HOURS * 60 * 60 * 1000);
